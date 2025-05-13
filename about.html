@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — DermTeach</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #FFFFFF; /* Primary white */
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      
+      /* Header styling */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem 2rem;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .logo {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: #8B1E2A; /* Mahogany */
+        text-decoration: none;
+      }
+      
+      /* Navigation styling */
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+      
+      .nav-link {
+        color: #000000; /* Black */
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+      
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #8B1E2A; /* Mahogany */
+        transition: width 0.3s ease;
+      }
+      
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+      
+      /* Page container */
+      .page-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 8rem 1.5rem 4rem;
+      }
+      
+      /* Page content styling */
+      .page-title {
+        color: #8B1E2A; /* Mahogany */
+        margin-bottom: 2rem;
+      }
+      
+      /* Timeline styling */
+      .timeline {
+        position: relative;
+      }
+      
+      .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #8B1E2A; /* Mahogany */
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .timeline-item {
+        margin-bottom: 3rem;
+        position: relative;
+      }
+      
+      .timeline-dot {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #8B1E2A; /* Mahogany */
+        border-radius: 50%;
+        left: 50%;
+        top: 20px;
+        transform: translateX(-50%);
+        z-index: 2;
+      }
+      
+      .timeline-content {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        width: calc(50% - 2rem);
+      }
+      
+      .timeline-left {
+        margin-right: auto;
+      }
+      
+      .timeline-right {
+        margin-left: auto;
+      }
+      
+      /* Value card styling */
+      .value-card {
+        background-color: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        height: 100%;
+      }
+      
+      .value-card:hover {
+        transform: translateY(-5px);
+      }
+      
+      .value-icon {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(139, 30, 42, 0.1); /* Mahogany with opacity */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      
+      /* Stats styling */
+      .stat-card {
+        background-color: #111111; /* Dark black */
+        border-radius: 1rem;
+        padding: 1.5rem;
+        color: white;
+        text-align: center;
+        height: 100%;
+      }
+      
+      /* Button styling */
+      .btn-primary {
+        background-color: #8B1E2A; /* Mahogany */
+        color: #FFFFFF; /* White */
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+        text-decoration: none;
+      }
+      
+      .btn-primary:hover {
+        background-color: #6D1720; /* Darker mahogany */
+      }
+
+      /* Footer styling */
+      footer {
+        background-color: #FFFFFF; /* White */
+        padding: 2rem 1rem;
+        text-align: center;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+      }
+      
+      /* Responsive timeline styling */
+      @media (max-width: 768px) {
+        .timeline::before {
+          left: 30px;
+        }
+        
+        .timeline-dot {
+          left: 30px;
+        }
+        
+        .timeline-content {
+          width: calc(100% - 60px);
+          margin-left: 60px;
+        }
+        
+        .timeline-left,
+        .timeline-right {
+          margin-left: 60px;
+          margin-right: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header with navigation -->
+    <header id="header">
+      <a href="landing.html" class="logo">DermTeach</a>
+      
+      <nav class="nav-links">
+        <a href="solutions.html" class="nav-link">Solutions</a>
+        <a href="people.html" class="nav-link">People</a>
+        <a href="about.html" class="nav-link active">About</a>
+      </nav>
+    </header>
+
+    <div class="page-container">
+      <h1 class="text-4xl font-bold page-title">About DermTeach</h1>
+      
+      <div class="my-10">
+        <p class="text-lg text-gray-800 mb-8">
+          Founded in 2025, DermTeach is a biotechnology startup created by a diverse team of engineers and scientists dedicated to revolutionizing how people understand and care for their skin health. 
+          We're creating accessible, at-home diagnostic tools that provide clinical-grade insights into skin health markers.
+        </p>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
+          <p class="text-gray-800 leading-relaxed">
+            To empower individuals with precise, personalized knowledge about their skin health, enabling them to make informed decisions 
+            about skincare products, treatments, and lifestyle factors that affect their skin's condition and appearance.
+          </p>
+          
+          <h2 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Our Vision</h2>
+          <p class="text-gray-800 leading-relaxed">
+            A world where everyone has access to dermatological-grade insights about their unique skin profile, helping to minimize 
+            skin conditions, reduce healthcare costs, and promote healthier, more confident lives.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Our Journey Section -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold mb-12 text-gray-900">Our Journey</h2>
+        
+        <div class="timeline">
+          <!-- Timeline Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content timeline-left">
+              <h3 class="font-bold text-xl mb-2 text-gray-900">2023 Q4</h3>
+              <p class="text-gray-700">
+                The DermTeach concept was born when Jaewoo Kang (UT) and Filippo Cuni (ETH) connected over their shared vision of bringing clinical-grade skin diagnostics to the home setting. Initial research and concept development began.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content timeline-right">
+              <h3 class="font-bold text-xl mb-2 text-gray-900">2024 Q1</h3>
+              <p class="text-gray-700">
+                Kate Gemrich, Adam Kahn, and Nadia Wheeler from Purdue's Biomedical Engineering program joined the team, bringing specialized expertise in biosensor development and medical device design.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content timeline-left">
+              <h3 class="font-bold text-xl mb-2 text-gray-900">2024 Q2</h3>
+              <p class="text-gray-700">
+                Successfully developed our first prototype of DermSens™ Home Kit and began preparation for initial validation testing with a small focus group of volunteers.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 4 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content timeline-right">
+              <h3 class="font-bold text-xl mb-2 text-gray-900">2024 Q3</h3>
+              <p class="text-gray-700">
+                Secured initial seed funding from university innovation grants and began exploring partnerships with dermatology clinics for clinical validation studies.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 5 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content timeline-left">
+              <h3 class="font-bold text-xl mb-2 text-gray-900">2024 Q4</h3>
+              <p class="text-gray-700">
+                Commenced development of the DermTrack™ digital platform to complement our testing kits, with a focus on data security and personalized insights.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 6 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content timeline-right">
+              <h3 class="font-bold text-xl mb-2 text-gray-900">2025 Q2</h3>
+              <p class="text-gray-700">
+                <strong>Now:</strong> Refining our product based on user feedback and preparing for a wider beta testing phase. Building our waitlist for our anticipated product launch.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Our Team Section - NEW -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold mb-10 text-gray-900">Our Team</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Team Member 1 -->
+          <div class="bg-white p-6 rounded-xl shadow-md text-center">
+            <div class="w-32 h-32 rounded-full bg-gray-100 mx-auto mb-4 flex items-center justify-center">
+              <span class="text-gray-900 text-2xl font-bold">JK</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Jaewoo Kang</h3>
+            <p class="text-gray-800 font-medium">Co-Founder & CEO</p>
+            <p class="text-gray-700 mt-2">BS Biochemistry, University of Texas</p>
+            <p class="text-gray-700 mt-4">Leading business strategy and vision with expertise in biochemical analysis and molecular diagnostics.</p>
+          </div>
+          
+          <!-- Team Member 2 -->
+          <div class="bg-white p-6 rounded-xl shadow-md text-center">
+            <div class="w-32 h-32 rounded-full bg-gray-100 mx-auto mb-4 flex items-center justify-center">
+              <span class="text-gray-900 text-2xl font-bold">FC</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Filippo Cuni</h3>
+            <p class="text-gray-800 font-medium">Co-Founder & CTO</p>
+            <p class="text-gray-700 mt-2">PhD Biomedical Engineering, ETH Zürich</p>
+            <p class="text-gray-700 mt-4">Driving technology innovation with advanced research in biosensor technology and medical diagnostics.</p>
+          </div>
+          
+          <!-- Team Member 3 -->
+          <div class="bg-white p-6 rounded-xl shadow-md text-center">
+            <div class="w-32 h-32 rounded-full bg-gray-100 mx-auto mb-4 flex items-center justify-center">
+              <span class="text-gray-900 text-2xl font-bold">KG</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Kate Gemrich</h3>
+            <p class="text-gray-800 font-medium">Chief Operating Officer</p>
+            <p class="text-gray-700 mt-2">BS Biomedical Engineering, Purdue University</p>
+            <p class="text-gray-700 mt-4">Leading operations and overseeing product development with expertise in biomedical device design and user experience optimization.</p>
+          </div>
+          
+          <!-- Team Member 4 -->
+          <div class="bg-white p-6 rounded-xl shadow-md text-center">
+            <div class="w-32 h-32 rounded-full bg-gray-100 mx-auto mb-4 flex items-center justify-center">
+              <span class="text-gray-900 text-2xl font-bold">AK</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Adam Kahn</h3>
+            <p class="text-gray-800 font-medium">Software Engineering Lead</p>
+            <p class="text-gray-700 mt-2">BS Biomedical Engineering, Purdue University</p>
+            <p class="text-gray-700 mt-4">Developing our digital platform and algorithm integration for accurate data analysis and user insights.</p>
+          </div>
+          
+          <!-- Team Member 5 -->
+          <div class="bg-white p-6 rounded-xl shadow-md text-center">
+            <div class="w-32 h-32 rounded-full bg-gray-100 mx-auto mb-4 flex items-center justify-center">
+              <span class="text-gray-900 text-2xl font-bold">NW</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Nadia Wheeler</h3>
+            <p class="text-gray-800 font-medium">Clinical Research Coordinator</p>
+            <p class="text-gray-700 mt-2">BS Biomedical Engineering, Purdue University</p>
+            <p class="text-gray-700 mt-4">Managing our testing protocols and clinical validation studies with a focus on scientific rigor and user safety.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Our Values Section -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold mb-10 text-gray-900">Our Core Values</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Value 1 -->
+          <div class="value-card">
+            <div class="value-icon">
+              <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-900">Scientific Integrity</h3>
+            <p class="text-gray-700">
+              We are committed to rigorous scientific methodology, transparent reporting of results, and continuous validation of our technology through peer-reviewed research.
+            </p>
+          </div>
+          
+          <!-- Value 2 -->
+          <div class="value-card">
+            <div class="value-icon">
+              <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-900">Inclusive Health</h3>
+            <p class="text-gray-700">
+              We design our products to serve diverse skin types, tones, and conditions, recognizing that skin health is important for everyone regardless of background.
+            </p>
+          </div>
+          
+          <!-- Value 3 -->
+          <div class="value-card">
+            <div class="value-icon">
+              <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.625 2.655A9 9 0 0119 11a1 1 0 11-2 0 7 7 0 00-9.625-6.492 1 1 0 11-.75-1.853zM4.662 4.959A1 1 0 014.75 6.37 6.97 6.97 0 001 11a1 1 0 11-2 0 8.97 8.97 0 014.662-7.874 1 1 0 011 1.833zm-1.645 5.845a1 1 0 10-.707 1.837l3 1a1 1 0 00.707-.47l2-3a1 1 0 10-1.673-1.091l-1.544 2.317-1.783-.593z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-900">Innovation</h3>
+            <p class="text-gray-700">
+              We continuously push the boundaries of what's possible in at-home diagnostics, combining cutting-edge biotechnology with elegant, user-friendly design.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Impact Stats Section -->
+      <div class="mb-16 py-10 bg-white rounded-xl shadow-md">
+        <h2 class="text-2xl font-bold mb-10 text-center text-gray-900">Our Progress</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-4">
+          <!-- Stat 1 -->
+          <div class="stat-card">
+            <h3 class="text-3xl font-bold mb-2">50+</h3>
+            <p class="text-sm opacity-80">Early testers providing feedback</p>
+          </div>
+          
+          <!-- Stat 2 -->
+          <div class="stat-card">
+            <h3 class="text-3xl font-bold mb-2">92%</h3>
+            <p class="text-sm opacity-80">Accuracy in preliminary tests</p>
+          </div>
+          
+          <!-- Stat 3 -->
+          <div class="stat-card">
+            <h3 class="text-3xl font-bold mb-2">3</h3>
+            <p class="text-sm opacity-80">Research partnerships in development</p>
+          </div>
+          
+          <!-- Stat 4 -->
+          <div class="stat-card">
+            <h3 class="text-3xl font-bold mb-2">500+</h3>
+            <p class="text-sm opacity-80">People on our waitlist</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Investors & Partners Section -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold mb-8 text-gray-900">Our Supporters & Partners</h2>
+        
+        <div class="bg-white rounded-lg p-8 shadow">
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+            <!-- Partner logos would go here in a real site -->
+            <div class="flex items-center justify-center h-24 bg-gray-100 rounded-md">
+              <p class="text-gray-800 font-medium">Purdue Foundry</p>
+            </div>
+            <div class="flex items-center justify-center h-24 bg-gray-100 rounded-md">
+              <p class="text-gray-800 font-medium">ETH Innovation Lab</p>
+            </div>
+            <div class="flex items-center justify-center h-24 bg-gray-100 rounded-md">
+              <p class="text-gray-800 font-medium">UT Austin Venture Labs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Press Section - Modified -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold mb-8 text-gray-900">Recent News</h2>
+        
+        <div class="space-y-4">
+          <!-- News Item 1 -->
+          <div class="bg-white p-6 rounded-lg shadow flex flex-col md:flex-row gap-4 items-center">
+            <div class="flex-shrink-0 w-full md:w-48 h-16 bg-gray-100 rounded flex items-center justify-center">
+              <p class="text-gray-800 font-medium">Campus Innovation Spotlight</p>
+            </div>
+            <div class="flex-grow">
+              <h3 class="font-bold text-lg text-gray-900">"DermTeach Team Selected for University Innovation Challenge Finals"</h3>
+              <p class="text-gray-700">March 2025</p>
+            </div>
+          </div>
+          
+          <!-- News Item 2 -->
+          <div class="bg-white p-6 rounded-lg shadow flex flex-col md:flex-row gap-4 items-center">
+            <div class="flex-shrink-0 w-full md:w-48 h-16 bg-gray-100 rounded flex items-center justify-center">
+              <p class="text-gray-800 font-medium">MedTech Today</p>
+            </div>
+            <div class="flex-grow">
+              <h3 class="font-bold text-lg text-gray-900">"Student Startups to Watch: Innovations in Home Diagnostics"</h3>
+              <p class="text-gray-700">February 2025</p>
+            </div>
+          </div>
+          
+          <!-- News Item 3 -->
+          <div class="bg-white p-6 rounded-lg shadow flex flex-col md:flex-row gap-4 items-center">
+            <div class="flex-shrink-0 w-full md:w-48 h-16 bg-gray-100 rounded flex items-center justify-center">
+              <p class="text-gray-800 font-medium">University Research Bulletin</p>
+            </div>
+            <div class="flex-grow">
+              <h3 class="font-bold text-lg text-gray-900">"Cross-University Collaboration Yields Promising Results in Skin Diagnostics"</h3>
+              <p class="text-gray-700">January 2025</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Contact Section -->
+      <div class="bg-white p-8 rounded-xl shadow-lg">
+        <h2 class="text-2xl font-bold mb-6 text-center text-gray-900">Get in Touch</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-lg font-bold mb-4 text-gray-900">Contact Information</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <svg class="w-5 h-5 text-gray-900 mt-1 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                </svg>
+                <div>
+                  <p class="font-medium text-gray-900">Location</p>
+                  <p class="text-gray-700">
+                    Innovation Hub<br>
+                    West Lafayette, IN 47906
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <svg class="w-5 h-5 text-gray-900 mt-1 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                </svg>
+                <div>
+                  <p class="font-medium text-gray-900">Email</p>
+                  <p class="text-gray-700">team@dermteach.com</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <svg class="w-5 h-5 text-gray-900 mt-1 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                </svg>
+                <div>
+                  <p class="font-medium text-gray-900">Phone</p>
+                  <p class="text-gray-700">+41 76 709 43 43</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-6">
+              <h3 class="text-lg font-bold mb-4 text-gray-900">Follow Us</h3>
+              <div class="flex space-x-4">
+                <a href="#" class="text-gray-900 hover:text-gray-700">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-900 hover:text-gray-700">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-900 hover:text-gray-700">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-bold mb-4 text-gray-900">Partnership Inquiries</h3>
+            <p class="text-gray-700 mb-6">
+              For collaboration opportunities, beta testing participation, or information about our development program, please reach out to our team.
+            </p>
+            <a href="mailto:partnerships@dermteach.com" class="btn-primary">Contact Partnerships Team</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+      <p class="text-sm text-gray-700">
+        &copy; 2025 DermTeach — All rights reserved.
+      </p>
+    </footer>
+
+    <!-- JavaScript for navigation -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Set active nav link
+        const currentPage = window.location.pathname.split('/').pop() || 'landing.html';
+        document.querySelectorAll('.nav-link').forEach(link => {
+          if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

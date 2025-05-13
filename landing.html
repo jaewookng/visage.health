@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DERMTEACH — At-Home Skin Testing</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- Three.js libraries for 3D model rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <style>
+      body {
+        background-color: #FFFFFF; /* Primary white */
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      
+      /* Header styling */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem 2rem;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        transform: translateY(-100%);
+        opacity: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      header.visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      
+      /* Transparent header for hero section */
+      header.transparent {
+        background-color: transparent;
+        backdrop-filter: none;
+        box-shadow: none;
+      }
+      
+      .logo {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: #8B1E2A; /* Mahogany */
+        text-decoration: none;
+      }
+      
+      /* Navigation styling */
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+      
+      .nav-link {
+        color: #000000; /* Black */
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+      
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #8B1E2A; /* Mahogany */
+        transition: width 0.3s ease;
+      }
+      
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+      
+      /* Scroll snap container */
+      .scroll-container {
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+        height: 100vh;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+      
+      /* Section styles with scroll snap */
+      section {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 4rem 1.5rem;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
+      
+      /* Hero section */
+      .hero-section {
+        background-color: #FFFFFF; /* Primary white */
+        z-index: 1;
+      }
+      
+      /* Features section */
+      .features-section {
+        position: relative;
+        background: transparent;
+        z-index: 2;
+      }
+      
+      /* Trust section */
+      .trust-section {
+        background-color: #F5F5F5; /* Light gray */
+        z-index: 3;
+      }
+      
+      /* Footer styling - hidden by default */
+      footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #FFFFFF; /* Primary white */
+        padding: 1rem;
+        text-align: center;
+        z-index: 50;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      
+      /* Footer visible state */
+      footer.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Enhanced fluid animation background - Black & White tones with mahogany */
+      .fluid-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+      }
+      
+      .fluid-bg::before,
+      .fluid-bg::after {
+        content: '';
+        position: absolute;
+        width: 150%;
+        height: 150%;
+        top: -25%;
+        left: -25%;
+        background: linear-gradient(
+          45deg,
+          rgba(0, 0, 0, 0.15),  /* Black with increased opacity */
+          rgba(139, 30, 42, 0.12),  /* Mahogany with increased opacity */
+          rgba(245, 245, 245, 0.15),  /* Light gray with increased opacity */
+          rgba(255, 255, 255, 0.15)   /* White with increased opacity */
+        );
+        border-radius: 30%;
+        filter: blur(30px);
+        animation: fluidAnimation 15s infinite linear;
+      }
+      
+      .fluid-bg::after {
+        width: 130%;
+        height: 130%;
+        top: -15%;
+        left: -15%;
+        opacity: 0.9; /* Increased opacity from 0.8 */
+        background: linear-gradient(
+          -45deg,
+          rgba(0, 0, 0, 0.15),   /* Black with increased opacity */
+          rgba(139, 30, 42, 0.12),   /* Mahogany with increased opacity */
+          rgba(245, 245, 245, 0.15),   /* Light gray with increased opacity */
+          rgba(255, 255, 255, 0.15)   /* White with increased opacity */
+        );
+        animation: fluidAnimation 10s infinite linear reverse;
+      }
+      
+      @keyframes fluidAnimation {
+        0% {
+          transform: rotate(0deg) scale(1);
+        }
+        50% {
+          transform: rotate(180deg) scale(1.3);
+        }
+        100% {
+          transform: rotate(360deg) scale(1);
+        }
+      }
+      
+      /* Ensure content appears on top of background */
+      .features-content {
+        position: relative;
+        z-index: 10;
+      }
+      
+      /* Feature cards with glass effect */
+      .feature-card {
+        background-color: rgba(255, 255, 255, 0.8); /* White with opacity */
+        padding: 1.5rem;
+        border-radius: 1rem;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      
+      /* Inner content container for consistent width */
+      .section-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      
+      /* Peekaboo animation styles */
+      .reveal {
+        position: relative;
+        opacity: 0;
+        transform: translateY(150px);
+        transition: all 1s ease;
+      }
+      
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Staggered reveal for feature cards */
+      .reveal-delay-1 {
+        transition-delay: 0.2s;
+      }
+      
+      .reveal-delay-2 {
+        transition-delay: 0.4s;
+      }
+      
+      .reveal-delay-3 {
+        transition-delay: 0.6s;
+      }
+
+      /* Mahogany accent color for buttons and highlights */
+      .mahogany-accent {
+        color: #8B1E2A; /* Mahogany */
+      }
+      
+      /* Button styling */
+      .btn-primary {
+        background-color: #8B1E2A; /* Mahogany */
+        color: #FFFFFF; /* White */
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500; /* Changed from font-medium: true; */
+        transition: background-color 0.3s ease;
+      }
+      
+      .btn-primary:hover {
+        background-color: #6D1720; /* Darker mahogany */
+      }
+      
+      /* 3D Model Canvas Styles */
+      .model-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        opacity: 0.8;
+        pointer-events: none; /* Allow clicks to pass through to elements below */
+      }
+      
+      #point-cloud-canvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+      
+      /* Ensure hero content stays above the 3D model */
+      .hero-content {
+        position: relative;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header with navigation -->
+    <header id="header">
+      <a href="landing.html" class="logo">DermTeach</a>
+      
+      <nav class="nav-links">
+        <a href="solutions.html" class="nav-link">Solutions</a>
+        <a href="people.html" class="nav-link">People</a>
+        <a href="about.html" class="nav-link">About</a>
+      </nav>
+    </header>
+    
+    <div class="scroll-container">
+      <!-- Hero Section -->
+      <section class="hero-section" id="hero">
+        <!-- 3D model container -->
+        <div class="model-container">
+          <canvas id="point-cloud-canvas"></canvas>
+        </div>
+        
+        <div class="section-container text-center reveal hero-content">
+          <h1 class="text-4xl sm:text-6xl font-bold max-w-4xl leading-tight mx-auto text-gray-900">
+            Discover Your Skin<br />
+            <span class="mahogany-accent">from Within</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-lg text-gray-700 mx-auto">
+            We're making skin science understandable.
+          </p>
+          <form
+            action="https://formspree.io/f/YOUR_FORM_ID"
+            method="POST"
+            class="mt-8 w-full max-w-md flex flex-col sm:flex-row gap-4 mx-auto"
+          >
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="Enter your email"
+              class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-mahogany bg-white"
+            />
+            <button
+              type="submit"
+              class="btn-primary"
+            >
+              Join the Waitlist
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Features Section with animated background -->
+      <section class="features-section" id="features">
+        <!-- Fluid animated background -->
+        <div class="fluid-bg"></div>
+        
+        <div class="features-content section-container">
+          <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+            <div class="feature-card reveal reveal-delay-1">
+              <div class="text-4xl mb-4">🔬</div>
+              <h3 class="font-semibold text-xl text-gray-900">Clinically-Inspired</h3>
+              <p class="text-gray-700 mt-2">
+                Built with cutting-edge biosensor technology and dermatological precision.
+              </p>
+            </div>
+            <div class="feature-card reveal reveal-delay-2">
+              <div class="text-4xl mb-4">🏡</div>
+              <h3 class="font-semibold text-xl text-gray-900">Designed for Home</h3>
+              <p class="text-gray-700 mt-2">
+                Gentle, user-friendly kits created to fit into your routine, not disrupt it.
+              </p>
+            </div>
+            <div class="feature-card reveal reveal-delay-3">
+              <div class="text-4xl mb-4">📊</div>
+              <h3 class="font-semibold text-xl text-gray-900">Actionable Results</h3>
+              <p class="text-gray-700 mt-2">
+                Your skin profile, decoded and delivered to your inbox within 48 hours.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust Section -->
+      <section class="trust-section" id="trust">
+        <div class="section-container text-center reveal">
+          <h2 class="text-xl font-medium text-gray-800">
+            Backed by dermatological research. HIPAA-compliant results platform.
+          </h2>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer as a simple bottom element - hidden by default -->
+    <footer>
+      <p class="text-sm text-gray-700">
+        &copy; 2025 DermTeach — All rights reserved.
+      </p>
+    </footer>
+
+    <!-- JavaScript for scroll animations -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('section');
+        const scrollContainer = document.querySelector('.scroll-container');
+        const footer = document.querySelector('footer');
+        const header = document.querySelector('header');
+        let lastScrollTop = 0;
+        
+        // Set active nav link
+        const currentPage = window.location.pathname.split('/').pop() || 'landing.html';
+        document.querySelectorAll('.nav-link').forEach(link => {
+          if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+          }
+        });
+        
+        // Initialize first section
+        setTimeout(() => {
+          document.querySelector('.hero-section .reveal').classList.add('active');
+          // Show header on hero section by default and make it transparent
+          header.classList.add('visible', 'transparent');
+        }, 300);
+        
+        // Update active section and animations
+        function updateActiveSection() {
+          const scrollPosition = scrollContainer.scrollTop;
+          const windowHeight = window.innerHeight;
+          
+          // Check scroll direction
+          const scrollingDown = scrollPosition > lastScrollTop;
+          lastScrollTop = scrollPosition;
+          
+          // Show header when scrolling up, hide when scrolling down (except on hero)
+          if (!scrollingDown) {
+            header.classList.add('visible');
+          } else if (scrollPosition > windowHeight / 2) {
+            // Don't hide header when in top half of hero section
+            header.classList.remove('visible');
+          }
+          
+          sections.forEach((section, index) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            
+            // If the section is in view
+            if (scrollPosition >= sectionTop - windowHeight / 2 && 
+                scrollPosition < sectionTop + sectionHeight - windowHeight / 2) {
+              
+              // Animate elements in the section
+              const revealElements = section.querySelectorAll('.reveal');
+              revealElements.forEach(el => el.classList.add('active'));
+              
+              // Show footer only when on the last section (Trust section)
+              if (section.id === 'trust') {
+                footer.classList.add('visible');
+              } else {
+                footer.classList.remove('visible');
+              }
+              
+              // Always show header on hero section and make it transparent
+              if (section.id === 'hero') {
+                header.classList.add('visible', 'transparent');
+              } else {
+                header.classList.remove('transparent');
+              }
+            }
+          });
+        }
+        
+        // Listen for scroll events
+        scrollContainer.addEventListener('scroll', updateActiveSection);
+        
+        // Handle header logo click
+        document.querySelector('.logo').addEventListener('click', function(e) {
+          e.preventDefault();
+          scrollContainer.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+        
+        // Initial check for visible sections
+        updateActiveSection();
+      });
+    </script>
+
+    <!-- 3D Point Cloud Model Script -->
+    <script>
+      // Initialize Three.js scene for the point cloud
+      let scene, camera, renderer, pointCloud, mixer;
+      let clock = new THREE.Clock();
+      
+      // Initialize the 3D scene
+      function initPointCloudScene() {
+        // Get the canvas element
+        const canvas = document.getElementById('point-cloud-canvas');
+        
+        // Create scene
+        scene = new THREE.Scene();
+        
+        // Create camera
+        camera = new THREE.PerspectiveCamera(
+          50, // Field of view
+          window.innerWidth / window.innerHeight, // Aspect ratio
+          0.1, // Near clipping plane
+          1000 // Far clipping plane
+        );
+        camera.position.z = 5;
+        
+        // Create renderer
+        renderer = new THREE.WebGLRenderer({
+          canvas: canvas,
+          alpha: true, // Transparent background
+          antialias: true
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        
+        // Add ambient light
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        
+        // Add directional light
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
+        
+        // Load the point cloud GLB model
+        const loader = new THREE.GLTFLoader();
+        loader.load(
+          'point_cloud.glb', // Path to the GLB file
+          function (gltf) {
+            pointCloud = gltf.scene;
+            
+            // Scale and position the model as needed
+            pointCloud.scale.set(1.5, 1.5, 1.5);
+            
+            // Center the model
+            const box = new THREE.Box3().setFromObject(pointCloud);
+            const center = box.getCenter(new THREE.Vector3());
+            pointCloud.position.x = -center.x;
+            pointCloud.position.y = -center.y;
+            pointCloud.position.z = -center.z;
+            
+            // Add the model to the scene
+            scene.add(pointCloud);
+            
+            // Handle animations if present
+            if (gltf.animations && gltf.animations.length > 0) {
+              mixer = new THREE.AnimationMixer(pointCloud);
+              const action = mixer.clipAction(gltf.animations[0]);
+              action.play();
+            }
+            
+            // Start animation loop
+            animate();
+          },
+          function (xhr) {
+            // Loading progress
+            console.log('Loading model: ' + (xhr.loaded / xhr.total * 100) + '%');
+          },
+          function (error) {
+            // Error handling
+            console.error('Error loading model:', error);
+          }
+        );
+        
+        // Make it responsive
+        window.addEventListener('resize', onWindowResize);
+      }
+      
+      // Handle window resize
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+      
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        
+        // Rotate the point cloud slowly
+        if (pointCloud) {
+          pointCloud.rotation.y += 0.002;
+        }
+        
+        // Update animations if any
+        if (mixer) {
+          mixer.update(clock.getDelta());
+        }
+        
+        renderer.render(scene, camera);
+      }
+      
+      // Initialize the scene when the document is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        initPointCloudScene();
+      });
+    </script>
+  </body>
+</html>
