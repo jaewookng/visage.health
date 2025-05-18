@@ -8,87 +8,13 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link href="styles.css" rel="stylesheet" />
     <!-- Three.js libraries for 3D model rendering -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
     <style>
-      body {
-        background-color: #FFFFFF; /* Primary white */
-        font-family: 'Inter', sans-serif;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-      }
-      
-      /* Header styling */
-      header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 1.5rem 2rem;
-        background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(5px);
-        z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-        transform: translateY(-100%);
-        opacity: 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      
-      header.visible {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      
-      /* Transparent header for hero section */
-      header.transparent {
-        background-color: transparent;
-        backdrop-filter: none;
-        box-shadow: none;
-      }
-      
-      .logo {
-        font-weight: 700;
-        font-size: 1.5rem;
-        color: #8B1E2A; /* Mahogany */
-        text-decoration: none;
-      }
-      
-      /* Navigation styling */
-      .nav-links {
-        display: flex;
-        gap: 2rem;
-      }
-      
-      .nav-link {
-        color: #000000; /* Black */
-        font-weight: 500;
-        text-decoration: none;
-        transition: color 0.3s ease;
-        position: relative;
-      }
-      
-      .nav-link::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: #8B1E2A; /* Mahogany */
-        transition: width 0.3s ease;
-      }
-      
-      .nav-link:hover::after,
-      .nav-link.active::after {
-        width: 100%;
-      }
-      
+      /* Landing page specific styles */
       /* Scroll snap container */
       .scroll-container {
         scroll-snap-type: y mandatory;
@@ -129,28 +55,6 @@
       .trust-section {
         background-color: #F5F5F5; /* Light gray */
         z-index: 3;
-      }
-      
-      /* Footer styling - hidden by default */
-      footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #FFFFFF; /* Primary white */
-        padding: 1rem;
-        text-align: center;
-        z-index: 50;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-      }
-      
-      /* Footer visible state */
-      footer.visible {
-        opacity: 1;
-        transform: translateY(0);
       }
       
       /* Enhanced fluid animation background - Black & White tones with mahogany */
@@ -263,21 +167,26 @@
 
       /* Mahogany accent color for buttons and highlights */
       .mahogany-accent {
-        color: #8B1E2A; /* Mahogany */
+        color: var(--primary);
       }
       
-      /* Button styling */
-      .btn-primary {
-        background-color: #8B1E2A; /* Mahogany */
-        color: #FFFFFF; /* White */
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
-        font-weight: 500; /* Changed from font-medium: true; */
-        transition: background-color 0.3s ease;
+      /* Landing page specific header styles */
+      header {
+        transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        transform: translateY(-100%);
+        opacity: 0;
       }
       
-      .btn-primary:hover {
-        background-color: #6D1720; /* Darker mahogany */
+      header.visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      
+      /* Transparent header for hero section */
+      header.transparent {
+        background-color: transparent;
+        backdrop-filter: none;
+        box-shadow: none;
       }
       
       /* 3D Model Canvas Styles */
@@ -302,6 +211,23 @@
       .hero-content {
         position: relative;
         z-index: 10;
+      }
+      
+      /* Footer styling - hidden by default */
+      footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      
+      /* Footer visible state */
+      footer.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
     </style>
   </head>

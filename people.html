@@ -8,81 +8,9 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link href="styles.css" rel="stylesheet" />
     <style>
-      body {
-        background-color: #FFFFFF; /* Primary white */
-        font-family: 'Inter', sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-      
-      /* Header styling */
-      header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 1.5rem 2rem;
-        background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(5px);
-        z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      
-      .logo {
-        font-weight: 700;
-        font-size: 1.5rem;
-        color: #8B1E2A; /* Mahogany */
-        text-decoration: none;
-      }
-      
-      /* Navigation styling */
-      .nav-links {
-        display: flex;
-        gap: 2rem;
-      }
-      
-      .nav-link {
-        color: #000000; /* Black */
-        font-weight: 500;
-        text-decoration: none;
-        transition: color 0.3s ease;
-        position: relative;
-      }
-      
-      .nav-link::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: #8B1E2A; /* Mahogany */
-        transition: width 0.3s ease;
-      }
-      
-      .nav-link:hover::after,
-      .nav-link.active::after {
-        width: 100%;
-      }
-      
-      /* Page container */
-      .page-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 8rem 1.5rem 4rem;
-      }
-      
-      /* Page content styling */
-      .page-title {
-        color: #8B1E2A; /* Mahogany */
-        margin-bottom: 2rem;
-      }
-      
-      /* Team member card styling */
+      /* People page specific styles */
       .team-card {
         background-color: white;
         border-radius: 1rem;
@@ -102,57 +30,6 @@
         background-position: center;
         background-size: cover;
         background-color: #F5F5F5; /* Light gray as placeholder */
-      }
-      
-      .social-icon {
-        color: #8B1E2A; /* Mahogany */
-        transition: color 0.2s ease;
-      }
-      
-      .social-icon:hover {
-        color: #6D1720; /* Darker mahogany */
-      }
-      
-      /* Button styling */
-      .btn-primary {
-        background-color: #8B1E2A; /* Mahogany */
-        color: #FFFFFF; /* White */
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
-        font-weight: 500;
-        transition: background-color 0.3s ease;
-        display: inline-block;
-        text-decoration: none;
-      }
-      
-      .btn-primary:hover {
-        background-color: #6D1720; /* Darker mahogany */
-      }
-
-      /* Footer styling */
-      footer {
-        background-color: #FFFFFF; /* White */
-        padding: 2rem 1rem;
-        text-align: center;
-        margin-top: 4rem;
-        border-top: 1px solid rgba(0,0,0,0.05);
-      }
-      
-      /* Section styling */
-      .section-heading {
-        position: relative;
-        margin-bottom: 3rem;
-        padding-bottom: 1rem;
-      }
-      
-      .section-heading::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 80px;
-        height: 3px;
-        background-color: #8B1E2A; /* Mahogany */
       }
     </style>
   </head>
