@@ -213,6 +213,25 @@
         z-index: 10;
       }
       
+      /* Semi-opaque oval background for hero text */
+      .bg-oval {
+        position: relative;
+        z-index: 1;
+      }
+      
+      .bg-oval::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 120%;
+        height: 180%;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 50px;
+        z-index: -1;
+      }
+      
       /* Footer styling - hidden by default */
       footer {
         position: fixed;
@@ -260,8 +279,8 @@
             Discover Your Skin<br />
             <span class="mahogany-accent">from Within</span>
           </h1>
-          <p class="mt-6 max-w-xl text-lg text-gray-700 mx-auto">
-            We're making skin science clear.
+          <p class="mt-6 max-w-xl text-lg text-gray-700 mx-auto relative px-8 py-3">
+            <span class="bg-oval">We're making skin science clear.</span>
           </p>
           <form
             action="https://formspree.io/f/YOUR_FORM_ID"
