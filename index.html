@@ -51,8 +51,8 @@
         z-index: 2;
       }
       
-      /* Trust section */
-      .trust-section {
+      /* Core Foundation section */
+      .core-foundation-section {
         background-color: #F5F5F5; /* Light gray */
         z-index: 3;
       }
@@ -331,12 +331,47 @@
         </div>
       </section>
 
-      <!-- Trust Section -->
-      <section class="trust-section" id="trust">
-        <div class="section-container text-center reveal">
-          <h2 class="text-xl font-medium text-gray-800">
-            Backed by dermatological research. HIPAA-compliant results platform.
-          </h2>
+      <!-- Core Foundation Section -->
+      <section class="core-foundation-section" id="core-foundation">
+        <div class="section-container reveal">
+          <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-4 text-center">Bridging the Scientific Knowledge Gap</h2>
+            <p class="text-lg text-gray-700 mb-6">
+              Our mission is to democratize dermatological science, making advanced skin diagnostics accessible to everyone. Through our innovative technology, we translate complex dermatological insights into practical, actionable knowledge for everyday skincare decisions.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+              <div class="flex flex-col items-start">
+                <div class="rounded-full bg-gray-100 p-3 mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mahogany-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-xl text-gray-900 mb-2">Scientific Rigor</h3>
+                <p class="text-gray-700">
+                  Every product and recommendation is backed by peer-reviewed research and developed alongside leading dermatologists, ensuring credibility and effectiveness.
+                </p>
+              </div>
+              <div class="flex flex-col items-start">
+                <div class="rounded-full bg-gray-100 p-3 mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mahogany-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-xl text-gray-900 mb-2">Accessible Knowledge</h3>
+                <p class="text-gray-700">
+                  Proprietary technology is important, but communication is at the core of our mission. We aim to make complex dermatological insights understandable and actionable for everyone.
+                </p>
+              </div>
+            </div>
+            <div class="text-center mt-10">
+              <a href="manifesto.html" class="inline-flex items-center text-base font-medium mahogany-accent hover:underline">
+                Read our full manifesto
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -401,8 +436,8 @@
               const revealElements = section.querySelectorAll('.reveal');
               revealElements.forEach(el => el.classList.add('active'));
               
-              // Show footer only when on the last section (Trust section)
-              if (section.id === 'trust') {
+              // Show footer only when on the last section (Core Foundation section)
+              if (section.id === 'core-foundation') {
                 footer.classList.add('visible');
               } else {
                 footer.classList.remove('visible');
