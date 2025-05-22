@@ -215,13 +215,17 @@
       
       /* Footer styling - hidden by default */
       footer {
-        position: absolute;
+        position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
+        padding: 1rem;
+        background-color: rgba(255, 255, 255, 0.9);
+        text-align: center;
         opacity: 0;
         transform: translateY(20px);
         transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 100;
       }
       
       /* Footer visible state */
@@ -411,6 +415,7 @@
         function updateActiveSection() {
           const scrollPosition = scrollContainer.scrollTop;
           const windowHeight = window.innerHeight;
+          const scrollHeight = scrollContainer.scrollHeight;
           
           // Check scroll direction
           const scrollingDown = scrollPosition > lastScrollTop;
@@ -422,6 +427,14 @@
           } else if (scrollPosition > windowHeight / 2) {
             // Don't hide header when in top half of hero section
             header.classList.remove('visible');
+          }
+          
+          // Check if scrolled to bottom (or very close to bottom)
+          const isAtBottom = scrollPosition + windowHeight >= scrollHeight - 50; // 50px threshold
+          if (isAtBottom) {
+            footer.classList.add('visible');
+          } else {
+            footer.classList.remove('visible');
           }
           
           sections.forEach((section, index) => {
@@ -436,11 +449,11 @@
               const revealElements = section.querySelectorAll('.reveal');
               revealElements.forEach(el => el.classList.add('active'));
               
-              // Show footer only when on the last section (Core Foundation section)
-              if (section.id === 'core-foundation') {
-                footer.classList.add('visible');
+              // Always show header on hero section and make it transparent
+              if (section.id === 'hero') {
+                header.classList.add('visible', 'transparent');
               } else {
-                footer.classList.remove('visible');
+                header.classList.remove('transparent');
               }
               
               // Always show header on hero section and make it transparent
