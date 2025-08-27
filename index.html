@@ -58,7 +58,7 @@
         z-index: 3;
       }
       
-      /* Enhanced fluid animation background - Black & White tones with mahogany */
+      /* Enhanced fluid animation background - Main color #374f65 with complementary tones */
       .fluid-bg {
         position: absolute;
         top: 0;
@@ -79,10 +79,10 @@
         left: -25%;
         background: linear-gradient(
           45deg,
-          rgba(0, 0, 0, 0.15),  /* Black with increased opacity */
-          rgba(139, 30, 42, 0.12),  /* Mahogany with increased opacity */
-          rgba(245, 245, 245, 0.15),  /* Light gray with increased opacity */
-          rgba(255, 255, 255, 0.15)   /* White with increased opacity */
+          rgba(55, 79, 101, 0.25),  /* Main color #374f65 with opacity */
+          rgba(55, 79, 101, 0.15),  /* Main color with lower opacity */
+          rgba(139, 30, 42, 0.12),  /* Mahogany accent */
+          rgba(245, 245, 245, 0.18)  /* Light gray for contrast */
         );
         border-radius: 30%;
         filter: blur(30px);
@@ -94,13 +94,13 @@
         height: 130%;
         top: -15%;
         left: -15%;
-        opacity: 0.9; /* Increased opacity from 0.8 */
+        opacity: 0.9;
         background: linear-gradient(
           -45deg,
-          rgba(0, 0, 0, 0.15),   /* Black with increased opacity */
-          rgba(139, 30, 42, 0.12),   /* Mahogany with increased opacity */
-          rgba(245, 245, 245, 0.15),   /* Light gray with increased opacity */
-          rgba(255, 255, 255, 0.15)   /* White with increased opacity */
+          rgba(55, 79, 101, 0.20),   /* Main color #374f65 with medium opacity */
+          rgba(55, 79, 101, 0.12),   /* Main color with lower opacity */
+          rgba(139, 30, 42, 0.10),   /* Mahogany accent */
+          rgba(255, 255, 255, 0.15)   /* White for highlights */
         );
         animation: fluidAnimation 10s infinite linear reverse;
       }
@@ -295,7 +295,16 @@
         </div>
         <div class="section-container flex flex-col items-start justify-center h-full hero-content" style="min-height:60vh;">
           <h1 class="text-5xl sm:text-7xl font-extrabold text-black mb-4" style="letter-spacing:-2px;">Visage Health</h1>
-          <p class="text-lg sm:text-2xl text-gray-800 font-light mb-2 pl-1">[vis·​age] <span class="font-normal">(n)</span> the face, usually with reference to shape, features, expression, etc.</p>
+          <p class="text-lg sm:text-2xl text-gray-800 font-light mb-6 pl-1">[vis·​age] <span class="font-normal">(n)</span> the face, usually with reference to shape, features, expression, etc.</p>
+          <div class="relative inline-block">
+            <div class="fluid-bg" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; border-radius: 0.5rem; overflow: hidden;"></div>
+            <a href="https://visage-health-labs.notion.site/25c829b091d3800e9cb4fa6552d6efd1?v=25c829b091d380daa8fc000ce1a588ac" target="_blank" class="relative inline-flex items-center px-6 py-3 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl border-0 bg-white bg-opacity-90 backdrop-blur-sm text-black hover:bg-opacity-100">
+              See our worklogs
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -309,7 +318,7 @@
             </div>
             <h2 class="text-2xl font-semibold text-gray-900 mb-4">Our Origins</h2>
             <p class="text-lg text-gray-700 mb-6">
-              <span class="text-red-600 font-semibold">Swiss</span> R&D, for <span class="race-carousel-container inline-block relative overflow-hidden h-6 w-14">
+              <span class="text-red-600 font-semibold">Swiss</span> R&D, for <span class="race-carousel-container inline-block relative overflow-hidden h-6 w-12">
                 <span class="race-carousel absolute top-0 left-0 w-full transition-transform duration-500 ease-in-out" id="raceCarousel">
                   <span class="block">AAPC</span>
                   <span class="block">POC</span>
