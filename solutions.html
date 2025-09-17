@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solutions — Visage Health</title>
     <link rel="icon" type="image/png" href="resources/favicon.png" />
-    <link
-      href="resources/Microneedle_Patch_Biomarker_Demo_Video.mp4"
-      rel="stylesheet"
-    />
     <link href="styles.css" rel="stylesheet" />
     <style>
       /* Solutions page specific styles */
@@ -96,10 +92,215 @@
         pointer-events: none;
       }
 
-      /* Responsive video container */
+      /* Page specific styles */
+      .page-subtitle {
+        font-size: 1.25rem;
+        color: var(--gray-700);
+        margin-bottom: 2rem;
+      }
+
+      .intro-text {
+        font-size: 1.125rem;
+        color: var(--gray-800);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      /* Video section */
+      .video-section {
+        margin-top: 3rem;
+      }
+
+      .video-container {
+        max-width: 64rem;
+        margin: 0 auto;
+      }
+
+      .video-wrapper {
+        position: relative;
+        background-color: var(--gray-900);
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        margin-bottom: 2rem;
+      }
+
+      .video-wrapper video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Video overlay */
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+
+      .video-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .overlay-content {
+        text-align: center;
+        color: white;
+      }
+
+      .play-button {
+        width: 5rem;
+        height: 5rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        backdrop-filter: blur(4px);
+      }
+
+      .play-button svg {
+        width: 2rem;
+        height: 2rem;
+        margin-left: 0.25rem;
+      }
+
+      .overlay-title {
+        font-size: 1.125rem;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+      }
+
+      .overlay-subtitle {
+        font-size: 0.875rem;
+        opacity: 0.8;
+      }
+
+      /* Video description */
+      .video-description {
+        text-align: center;
+      }
+
+      .demo-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 1rem;
+      }
+
+      .demo-description {
+        color: var(--gray-700);
+        margin-bottom: 1.5rem;
+        max-width: 32rem;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+      }
+
+      /* Features grid */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .feature-item {
+        text-align: center;
+      }
+
+      .feature-icon {
+        width: 3rem;
+        height: 3rem;
+        background-color: var(--gray-100);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 0.75rem;
+      }
+
+      .feature-icon svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: var(--gray-700);
+      }
+
+      .feature-title {
+        font-weight: 600;
+        color: var(--gray-900);
+        margin-bottom: 0.5rem;
+      }
+
+      .feature-description {
+        font-size: 0.875rem;
+        color: var(--gray-600);
+        line-height: 1.5;
+      }
+
+      /* CTA section */
+      .cta-section {
+        margin-top: 4rem;
+        text-align: center;
+      }
+
+      .cta-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 1rem;
+      }
+
+      .cta-description {
+        color: var(--gray-700);
+        margin-bottom: 1.5rem;
+        max-width: 32rem;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+      }
+
+      .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      /* Responsive design */
+      @media (min-width: 640px) {
+        .cta-buttons {
+          flex-direction: row;
+          justify-content: center;
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
       @media (max-width: 768px) {
-        .aspect-video {
-          aspect-ratio: 4 / 3;
+        .video-wrapper {
+          border-radius: 0.5rem;
+        }
+
+        .play-button {
+          width: 4rem;
+          height: 4rem;
+        }
+
+        .play-button svg {
+          width: 1.5rem;
+          height: 1.5rem;
         }
       }
     </style>
@@ -108,7 +309,7 @@
     <!-- Header with navigation -->
     <header id="header">
       <a href="index.html" class="logo">
-        <img src="resources/VisageHealth_Logo.svg" alt="Visage Health" class="h-8 sm:h-10">
+        <img src="resources/VisageHealth_Logo.svg" alt="Visage Health">
       </a>
       
       <nav class="nav-links">
@@ -119,86 +320,83 @@
     </header>
 
     <div class="page-container">
-      <h1 class="text-4xl font-bold page-title">Our Solutions</h1>
-      <p class="text-xl text-left mb-8 text-gray-700">Where data meets daily routine.</p>
+      <h1 class="page-title">Our Solutions</h1>
+      <p class="page-subtitle">Where data meets daily routine.</p>
       
       <div class="my-10">
-        <p class="text-lg text-gray-800 mb-8">
+        <p class="intro-text">
           Experience our innovative skin health technology through our interactive demo. 
           See how our advanced biosensor technology works and discover the future of personalized skincare analysis.
         </p>
       </div>
       
       <!-- Demo Video Section -->
-      <div class="mt-12">
-        <div class="max-w-4xl mx-auto">
+      <div class="video-section">
+        <div class="video-container">
           <!-- Video Container -->
-          <div class="relative bg-gray-900 rounded-2xl overflow-hidden shadow-2xl mb-8">
+          <div class="video-wrapper">
             <div class="aspect-video">
               <video 
-                class="w-full h-full object-cover" 
                 controls 
-                poster="resources/video-poster.jpg"
                 preload="metadata"
               >
-                <source src="resources/demo-video.mp4" type="video/mp4">
-                <source src="resources/demo-video.webm" type="video/webm">
+                <source src="resources/Microneedle_Patch_Biomarker_Demo_Video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
             </div>
             
             <!-- Video Overlay with Play Button (hidden when video is playing) -->
-            <div class="video-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer" onclick="playVideo()">
-              <div class="text-center text-white">
-                <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto backdrop-blur-sm">
-                  <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+            <div class="video-overlay" onclick="playVideo()">
+              <div class="overlay-content">
+                <div class="play-button">
+                  <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </div>
-                <p class="text-lg font-medium">Watch Demo</p>
-                <p class="text-sm opacity-80">See our technology in action</p>
+                <p class="overlay-title">Watch Demo</p>
+                <p class="overlay-subtitle">See our technology in action</p>
               </div>
             </div>
           </div>
           
           <!-- Video Description -->
-          <div class="text-center">
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">Interactive Technology Demo</h3>
-            <p class="text-gray-700 mb-6 max-w-2xl mx-auto">
+          <div class="video-description">
+            <h3 class="demo-title">Interactive Technology Demo</h3>
+            <p class="demo-description">
               This demonstration showcases our proprietary biosensor technology and how it analyzes skin health markers 
               to provide personalized insights and recommendations.
             </p>
             
             <!-- Key Features -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-              <div class="text-center">
-                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="features-grid">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
                 </div>
-                <h4 class="font-semibold text-gray-900 mb-2">Real-time Analysis</h4>
-                <p class="text-sm text-gray-600">Advanced biosensors provide instant skin health readings</p>
+                <h4 class="feature-title">Real-time Analysis</h4>
+                <p class="feature-description">Advanced biosensors provide instant skin health readings</p>
               </div>
               
-              <div class="text-center">
-                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h4 class="font-semibold text-gray-900 mb-2">Instant Results</h4>
-                <p class="text-sm text-gray-600">Get personalized insights within minutes, not days</p>
+                <h4 class="feature-title">Instant Results</h4>
+                <p class="feature-description">Get personalized insights within minutes, not days</p>
               </div>
               
-              <div class="text-center">
-                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h4 class="font-semibold text-gray-900 mb-2">Clinically Validated</h4>
-                <p class="text-sm text-gray-600">Backed by peer-reviewed research and dermatological expertise</p>
+                <h4 class="feature-title">Clinically Validated</h4>
+                <p class="feature-description">Backed by peer-reviewed research and dermatological expertise</p>
               </div>
             </div>
           </div>
@@ -206,12 +404,12 @@
       </div>
       
       <!-- Call to Action -->
-      <div class="mt-16 text-center">
-        <h2 class="text-2xl font-bold mb-4 text-gray-900">Ready to experience the future of skin health?</h2>
-        <p class="text-gray-700 mb-6 max-w-2xl mx-auto">
+      <div class="cta-section">
+        <h2 class="cta-title">Ready to experience the future of skin health?</h2>
+        <p class="cta-description">
           Watch our demo to see how our technology works, then join our community to stay updated on our progress and be among the first to access our platform.
         </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <div class="cta-buttons">
           <a href="index.html#hero" class="btn-primary">Join Our Community</a>
           <a href="https://visage-health-labs.notion.site/25c829b091d3800e9cb4fa6552d6efd1?v=25c829b091d380daa8fc000ce1a588ac" class="btn-secondary" target="_blank">View Development Progress</a>
         </div>
@@ -220,7 +418,7 @@
     
     <!-- Footer -->
     <footer>
-      <p class="text-sm text-gray-700">
+      <p>
         &copy; 2025 Visage Health — All rights reserved.
       </p>
     </footer>
